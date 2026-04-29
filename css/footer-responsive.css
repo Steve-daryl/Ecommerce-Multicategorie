@@ -132,7 +132,17 @@
 
 /* Phone */
 @media (max-width: 480px) {
-    .products-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .product-card-body { padding: 10px; }
+    .product-card-body h3 { font-size: 0.85rem; height: 2.4em; margin-bottom: 5px; }
+    .product-card-brand { font-size: 0.65rem; margin-bottom: 3px; }
+    .product-price .current { font-size: 0.95rem; }
+    .product-price .old { font-size: 0.75rem; }
+    .product-card-footer { padding: 0 10px 10px; }
+    .product-card-actions { bottom: 5px; right: 5px; gap: 5px; }
+    .product-card-actions .btn-icon { width: 30px; height: 30px; font-size: 0.8rem; }
+    .product-card-img { height: 180px; }
+
     .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .hero { padding: 35px 0; }
     .hero-content h1 { font-size: 1.8rem; line-height: 1.2; }
