@@ -1,0 +1,79 @@
+/* ========== THEME VARIABLES (BASE) ========== */
+:root {
+    /* Primary */
+    --primary: #082F63;
+    --primary-light: #0A3D82;
+    --primary-lighter: #1E4E8C;
+    --primary-bg: #EDF2F7;
+    
+    /* Accent */
+    --accent: #FFB020;
+    --accent-hover: #E59B1A;
+    --accent-secondary: #FFC44D;
+
+    /* Backgrounds */
+    --bg-main: #FFFFFF;
+    --bg-secondary: #F5F7FA;
+    --bg-card: #FFFFFF;
+    --bg-header: #FFFFFF;
+    --bg-footer: #082F63;
+    --bg-input: #FFFFFF;
+    --bg-overlay: rgba(0, 0, 0, 0.6);
+    --bg-announcement: #082F63;
+
+    /* Text */
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-muted: #7A7A7A;
+    --text-on-primary: #FFFFFF;
+    --text-on-footer: #D1D5DB;
+
+    /* Borders & Radius */
+    --border: #D5D9E0;
+    --border-focus: #082F63;
+    --radius-sm: 4px;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --radius-full: 50px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+    --shadow-hover: 0 12px 32px rgba(0,0,0,0.15);
+
+    /* Misc */
+    --transition: 0.3s ease;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --container: 1200px;
+    --header-h: 70px;
+    --announce-h: 36px;
+
+    /* Status Colors */
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #F59E0B;
+    --info: #17a2b8;
+}
+
+[data-theme="dark"] {
+    --primary: #4A90D9;
+    --primary-light: #6BA3E0;
+    --primary-bg: #1A2332;
+    --accent: #FFB020;
+    --bg-main: #0F1419;
+    --bg-secondary: #1A2332;
+    --bg-card: #1E2A3A;
+    --bg-header: #1A2332;
+    --bg-footer: #0A0F18;
+    --bg-input: #1E2A3A;
+    --text-primary: #E8E8E8;
+    --text-secondary: #B0B0B0;
+    --text-muted: #777777;
+    --text-on-footer: #666;
+    --border: #2D3748;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow: 0 2px 8px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+}
