@@ -53,22 +53,13 @@ $totalClients = $stmt->fetchColumn();
 $stmt = $pdo->query("SELECT * FROM commandes ORDER BY date_commande DESC LIMIT 5");
 $dernieresCmd = $stmt->fetchAll();
 
-// --- DATA POUR CHART.JS ---
-// 1. Ventes par semaine
-$stmt = $pdo->query("SELECT * FROM v_graph_semaine");
-$dataSemaine = $stmt->fetchAll(PDO::FETCH_ASSOC);
+require_once __DIR__ . '/../includes/stats_functions.php';
 
-// 2. Ventes par mois
-$stmt = $pdo->query("SELECT * FROM v_graph_mois");
-$dataMois = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// 3. Top Catégories
-$stmt = $pdo->query("SELECT * FROM v_graph_categories");
-$dataCategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// 4. Top 7 Produits
-$stmt = $pdo->query("SELECT * FROM v_graph_top7_produits");
-$dataTopProduits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// --- DATA POUR CHART.JS (Optimisé via PHP Service) ---
+$dataSemaine    = getStatsVentesSemaine($pdo);
+$dataMois       = getStatsVentesMois($pdo);
+$dataCategories = getStatsParCategorie($pdo);
+$dataTopProduits = getStatsTopProduits($pdo);
 
 // Helper CSS status
 function getStatusBadge($statut) {

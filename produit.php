@@ -113,6 +113,12 @@ require_once __DIR__ . '/includes/header.php';
             <div class="variant-selector">
                 <label>Choisir une option :</label>
                 <div class="variant-options">
+                    <!-- Produit Principal (Option par défaut) -->
+                    <div class="variant-option active <?= $prod['stock'] <= 0 ? 'disabled' : '' ?>" data-id="" data-prix="<?= $prixAffiche ?>" data-stock="<?= $prod['stock'] ?>">
+                        Standard
+                        <small>(<?= formatPrix($prixAffiche) ?>)</small>
+                    </div>
+
                     <?php foreach ($variantes as $v): ?>
                     <div class="variant-option <?= $v['stock'] <= 0 ? 'disabled' : '' ?>"
                          data-id="<?= $v['id'] ?>" data-prix="<?= $v['prix'] ?>" data-stock="<?= $v['stock'] ?>">
@@ -216,7 +222,11 @@ function handleAddToCart() {
     const qty = parseInt(document.getElementById('qtyInput').value) || 1;
     const variantId = document.getElementById('selectedVariantId')?.value || null;
     <?php if ($prod['a_variants']): ?>
-    if (!variantId) { Toast.show('Veuillez choisir une option', 'error'); return; }
+    // On vérifie qu'une option est bien active (le Standard par défaut ou une variante)
+    if (variantId === null && !document.querySelector('.variant-option.active')) { 
+        Toast.show('Veuillez choisir une option', 'error'); 
+        return; 
+    }
     <?php endif; ?>
     Cart.add(<?= $prod['id'] ?>, qty, variantId);
 }
