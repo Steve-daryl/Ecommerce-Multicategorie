@@ -42,9 +42,9 @@ $whatsappLink = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $whatsapp);
                 <h4>Liens Rapides</h4>
                 <ul>
                     <li><a href="<?= BASE_URL ?>/">Accueil</a></li>
-                    <li><a href="<?= BASE_URL ?>/boutique.php">Boutique</a></li>
-                    <li><a href="<?= BASE_URL ?>/panier.php">Mon Panier</a></li>
-                    <li><a href="<?= BASE_URL ?>/contact.php">Contact</a></li>
+                    <li><a href="<?= BASE_URL ?>/boutique">Boutique</a></li>
+                    <li><a href="<?= BASE_URL ?>/panier">Mon Panier</a></li>
+                    <li><a href="<?= BASE_URL ?>/contact">Contact</a></li>
                 </ul>
             </div>
 
@@ -53,7 +53,7 @@ $whatsappLink = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $whatsapp);
                 <h4>Catégories</h4>
                 <ul>
                     <?php foreach ($categories as $cat): ?>
-                    <li><a href="<?= BASE_URL ?>/boutique.php?categorie=<?= $cat['id'] ?>"><?= e($cat['nom']) ?></a></li>
+                    <li><a href="<?= BASE_URL ?>/boutique?categorie=<?= $cat['id'] ?>"><?= e($cat['nom']) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

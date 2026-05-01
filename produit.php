@@ -6,7 +6,7 @@ require_once __DIR__ . '/includes/config.php';
 $pdo = getPDO();
 
 $id = (int)($_GET['id'] ?? 0);
-if ($id <= 0) { header('Location: ' . BASE_URL . '/boutique.php'); exit; }
+if ($id <= 0) { header('Location: ' . BASE_URL . '/boutique'); exit; }
 
 // Fetch product
 $stmt = $pdo->prepare("
@@ -18,7 +18,7 @@ $stmt = $pdo->prepare("
 ");
 $stmt->execute(['id' => $id]);
 $prod = $stmt->fetch();
-if (!$prod) { header('Location: ' . BASE_URL . '/boutique.php'); exit; }
+if (!$prod) { header('Location: ' . BASE_URL . '/boutique'); exit; }
 
 // Images
 $stmtImg = $pdo->prepare("SELECT * FROM image_produit WHERE produit_id = :id ORDER BY ordre ASC");
@@ -58,9 +58,9 @@ require_once __DIR__ . '/includes/header.php';
     <div class="breadcrumb">
         <a href="<?= BASE_URL ?>/">Accueil</a>
         <span class="sep"><i class="fas fa-chevron-right"></i></span>
-        <a href="<?= BASE_URL ?>/boutique.php">Boutique</a>
+        <a href="<?= BASE_URL ?>/boutique">Boutique</a>
         <span class="sep"><i class="fas fa-chevron-right"></i></span>
-        <a href="<?= BASE_URL ?>/boutique.php?categorie=<?= $prod['categorie_id'] ?>"><?= e($prod['categorie_nom']) ?></a>
+        <a href="<?= BASE_URL ?>/boutique?categorie=<?= $prod['categorie_id'] ?>"><?= e($prod['categorie_nom']) ?></a>
         <span class="sep"><i class="fas fa-chevron-right"></i></span>
         <span><?= e($prod['nom']) ?></span>
     </div>
@@ -201,14 +201,14 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
                 <div class="product-card-body">
                     <div class="product-card-brand"><?= e($r['marque_nom'] ?? '') ?></div>
-                    <h3><a href="<?= BASE_URL ?>/produit.php?id=<?= $r['id'] ?>"><?= e($r['nom']) ?></a></h3>
+                    <h3><a href="<?= BASE_URL ?>/produit?id=<?= $r['id'] ?>"><?= e($r['nom']) ?></a></h3>
                     <div class="product-price">
                         <span class="current"><?= formatPrix($rPrix) ?></span>
                         <?php if ($rHasPromo): ?><span class="old"><?= formatPrix($r['prix']) ?></span><?php endif; ?>
                     </div>
                 </div>
                 <div class="product-card-footer">
-                    <a href="<?= BASE_URL ?>/produit.php?id=<?= $r['id'] ?>" class="btn btn-secondary btn-sm btn-block">Voir détails</a>
+                    <a href="<?= BASE_URL ?>/produit?id=<?= $r['id'] ?>" class="btn btn-secondary btn-sm btn-block">Voir détails</a>
                 </div>
             </div>
             <?php endforeach; ?>

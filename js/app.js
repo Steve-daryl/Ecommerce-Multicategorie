@@ -280,7 +280,7 @@ const ShopFilters = {
         });
         // Reset filters
         document.getElementById('resetFilters')?.addEventListener('click', () => {
-            window.location.href = `${BASE_URL}/boutique.php`;
+            window.location.href = `${BASE_URL}/boutique`;
         });
         
         // Desktop filter toggle

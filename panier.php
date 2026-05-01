@@ -34,7 +34,7 @@ if ($confirmation) { unset($_SESSION['order_confirmation']); }
             <i class="fab fa-whatsapp"></i> Envoyer sur WhatsApp
         </a>
         <br>
-        <a href="<?= BASE_URL ?>/boutique.php" class="btn btn-secondary">Continuer mes achats</a>
+        <a href="<?= BASE_URL ?>/boutique" class="btn btn-secondary">Continuer mes achats</a>
     </div>
 
     <?php elseif (empty($cart)): ?>
@@ -43,7 +43,7 @@ if ($confirmation) { unset($_SESSION['order_confirmation']); }
         <i class="fas fa-shopping-bag"></i>
         <h3>Votre panier est vide</h3>
         <p>Explorez notre boutique pour trouver des produits qui vous plaisent !</p>
-        <a href="<?= BASE_URL ?>/boutique.php" class="btn btn-primary btn-lg">
+        <a href="<?= BASE_URL ?>/boutique" class="btn btn-primary btn-lg">
             <i class="fas fa-store"></i> Aller à la boutique
         </a>
     </div>
@@ -96,7 +96,7 @@ if ($confirmation) { unset($_SESSION['order_confirmation']); }
                 </table>
             </div>
             <div style="margin-top:16px;">
-                <a href="<?= BASE_URL ?>/boutique.php" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Continuer mes achats</a>
+                <a href="<?= BASE_URL ?>/boutique" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Continuer mes achats</a>
             </div>
         </div>
 
