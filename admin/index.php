@@ -241,9 +241,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const dataCat = <?= json_encode($dataCategories) ?>;
     const dataTopProd = <?= json_encode($dataTopProduits) ?>;
 
+    // Store chart instances globally to allow theme updates
+    window.adminCharts = [];
+
     // 1. Chart Semaine (Bar)
     if (document.getElementById('chartSemaine')) {
-        new Chart(document.getElementById('chartSemaine'), {
+        const c1 = new Chart(document.getElementById('chartSemaine'), {
             type: 'bar',
             data: {
                 labels: dataSemaine.map(d => d.jour),
@@ -256,11 +259,12 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: { responsive: true, maintainAspectRatio: false }
         });
+        window.adminCharts.push(c1);
     }
 
     // 2. Chart Mois (Line)
     if (document.getElementById('chartMois')) {
-        new Chart(document.getElementById('chartMois'), {
+        const c2 = new Chart(document.getElementById('chartMois'), {
             type: 'line',
             data: {
                 labels: dataMois.map(d => d.mois),
@@ -275,11 +279,12 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: { responsive: true, maintainAspectRatio: false }
         });
+        window.adminCharts.push(c2);
     }
 
     // 3. Chart Categories (Doughnut)
     if (document.getElementById('chartCategories')) {
-        new Chart(document.getElementById('chartCategories'), {
+        const c3 = new Chart(document.getElementById('chartCategories'), {
             type: 'doughnut',
             data: {
                 labels: dataCat.map(d => d.categorie),
@@ -290,11 +295,12 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: { responsive: true, maintainAspectRatio: false }
         });
+        window.adminCharts.push(c3);
     }
 
     // 4. Chart Top Produits (Horizontal Bar)
     if (document.getElementById('chartTopProduits')) {
-        new Chart(document.getElementById('chartTopProduits'), {
+        const c4 = new Chart(document.getElementById('chartTopProduits'), {
             type: 'bar',
             data: {
                 labels: dataTopProd.map(d => d.produit),
@@ -311,6 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 maintainAspectRatio: false 
             }
         });
+        window.adminCharts.push(c4);
     }
 });
 </script>

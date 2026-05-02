@@ -15,9 +15,9 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 // Configuration
-$apiKey = "AIzaSyBC9T6AeEBINlWcu_pNcSvcv6NMpbCpNM4";
+$apiKey = "AIzaSyDfvd8VOlQDRHN8klIYZM9aqTA_eAEzMiQ";
 $model = "gemini-2.5-flash";
-$apiUrl = "https://generativelanguage.googleapis.com/v1/models/{$model}:generateContent?key={$apiKey}";
+$apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}";
 
 // Handle POST request
 $input = json_decode(file_get_contents('php://input'), true);
@@ -79,20 +79,22 @@ foreach ($history as $msg) {
     ];
 }
 
-// Add system instruction as part of the first user message or use systemInstruction field if supported
-// For simplicity and compatibility, we'll prepend it to the context
+// Add current user message
 $contents[] = [
     "role" => "user",
-    "parts" => [["text" => "[INSTRUCTION SYSTÈME: $systemInstruction]\n\nMessage de l'utilisateur : $userMessage"]]
+    "parts" => [["text" => $userMessage]]
 ];
 
 $data = [
+    "system_instruction" => [
+        "parts" => [["text" => $systemInstruction]]
+    ],
     "contents" => $contents,
     "generationConfig" => [
         "temperature" => 0.8,
         "topK" => 40,
         "topP" => 0.95,
-        "maxOutputTokens" => 2048,
+        "maxOutputTokens" => 8192,
     ]
 ];
 

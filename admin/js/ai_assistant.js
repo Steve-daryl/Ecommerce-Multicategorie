@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const floatBtn = document.getElementById('aiFloatBtn');
     const chatWindow = document.getElementById('aiChatWindow');
     const closeBtn = document.getElementById('aiCloseBtn');
+    const themeBtn = document.getElementById('aiThemeBtn');
     const sendBtn = document.getElementById('aiSendBtn');
     const chatInput = document.getElementById('aiChatInput');
     const messagesContainer = document.getElementById('aiMessages');
@@ -12,11 +13,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!floatBtn) return;
 
+    // Load Theme Preference
+    if (localStorage.getItem('ai_theme') === 'dark') {
+        chatWindow.classList.add('dark');
+        themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    // Toggle Theme
+    themeBtn.addEventListener('click', () => {
+        chatWindow.classList.toggle('dark');
+        const isDark = chatWindow.classList.contains('dark');
+        localStorage.setItem('ai_theme', isDark ? 'dark' : 'light');
+        themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+
     // Toggle Window
     floatBtn.addEventListener('click', () => {
         chatWindow.classList.toggle('active');
         if (chatWindow.classList.contains('active')) {
             chatInput.focus();
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
     });
 
@@ -77,12 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const msgDiv = document.createElement('div');
         msgDiv.className = `ai-message ${sender}`;
         
-        // Better formatting: bold, lists, and line breaks
-        let formattedText = text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/^\s*[\-\*]\s+(.*)/gm, '<li>$1</li>')
-            .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-            .replace(/\n/g, '<br>');
+        // Convert markdown-like bold to HTML if any (simple version)
+        let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        formattedText = formattedText.replace(/\n/g, '<br>');
         
         msgDiv.innerHTML = formattedText;
         messagesContainer.appendChild(msgDiv);
