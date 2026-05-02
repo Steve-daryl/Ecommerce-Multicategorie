@@ -15,7 +15,14 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 // Configuration
-$apiKey = "AIzaSyDfvd8VOlQDRHN8klIYZM9aqTA_eAEzMiQ";
+if (file_exists(__DIR__ . '/ai_config.php')) {
+    require_once __DIR__ . '/ai_config.php';
+    $apiKey = $ai_api_key;
+} else {
+    // Fallback or error
+    $apiKey = ""; 
+}
+
 $model = "gemini-2.5-flash";
 $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}";
 
