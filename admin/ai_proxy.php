@@ -23,7 +23,7 @@ if (file_exists(__DIR__ . '/ai_config.php')) {
     $apiKey = ""; 
 }
 
-$model = "gemini-2.5-flash";
+$model = "gemini-2.5-flash-lite";
 $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent?key={$apiKey}";
 
 // Handle POST request
@@ -101,7 +101,7 @@ $data = [
         "temperature" => 0.8,
         "topK" => 40,
         "topP" => 0.95,
-        "maxOutputTokens" => 8192,
+        "maxOutputTokens" => 2048,
     ]
 ];
 
@@ -124,13 +124,24 @@ if ($httpCode === 200) {
     $aiText = $result['candidates'][0]['content']['parts'][0]['text'] ?? "Désolé, je n'ai pas pu générer de réponse.";
     echo json_encode(['reply' => $aiText]);
 } else {
-    $errorMsg = 'Erreur lors de la communication avec l\'IA';
-    if ($curlError) {
-        $errorMsg .= " (CURL Error: $curlError)";
+    $errorMsg = 'Désolé, une erreur est survenue';
+    
+    if ($httpCode === 429) {
+        $errorMsg = 'Limite de messages atteinte pour aujourd\'hui ou trop de requêtes rapides. Veuillez patienter quelques minutes avant de réessayer.';
+    } elseif ($httpCode === 403) {
+        $errorMsg = 'Accès refusé. Votre clé d\'API semble invalide ou bloquée.';
+    } elseif ($httpCode === 400) {
+        $errorMsg = 'Requête invalide. Le modèle est peut-être indisponible ou surchargé.';
     }
+    
+    if ($curlError) {
+        $errorMsg .= " (Erreur réseau)";
+    }
+    
     echo json_encode([
         'error' => $errorMsg, 
         'http_code' => $httpCode,
+        // Toujours garder les détails en console pour le debug si besoin
         'details' => json_decode($response, true) ?? $response
     ]);
 }
