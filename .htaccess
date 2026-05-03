@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Ensure we don't rewrite actual files or directories
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Route requests without .php extension to the .php file
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Optional: Redirect from .php to clean URL
+# RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+# RewriteRule ^ %1 [R=301,L]

@@ -60,7 +60,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
             <a href="<?= BASE_URL ?>/" class="nav-link <?= $currentPage === 'index' ? 'active' : '' ?>">
                 <i class="fas fa-home"></i> Accueil
             </a>
-            <a href="<?= BASE_URL ?>/boutique.php" class="nav-link <?= $currentPage === 'boutique' ? 'active' : '' ?>">
+            <a href="<?= BASE_URL ?>/boutique" class="nav-link <?= $currentPage === 'boutique' ? 'active' : '' ?>">
                 <i class="fas fa-store"></i> Boutique
             </a>
             <div class="nav-dropdown">
@@ -69,17 +69,17 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
                 </a>
                 <div class="dropdown-menu">
                     <?php foreach ($categories as $cat): ?>
-                    <a href="<?= BASE_URL ?>/boutique.php?categorie=<?= $cat['id'] ?>" class="dropdown-item">
+                    <a href="<?= BASE_URL ?>/boutique?categorie=<?= $cat['id'] ?>" class="dropdown-item">
                         <span class="cat-icon"><?= $cat['icone'] ?></span>
                         <?= e($cat['nom']) ?>
                     </a>
                     <?php endforeach; ?>
                 </div>
             </div>
-            <a href="<?= BASE_URL ?>/panier.php" class="nav-link <?= $currentPage === 'panier' ? 'active' : '' ?>">
+            <a href="<?= BASE_URL ?>/panier" class="nav-link <?= $currentPage === 'panier' ? 'active' : '' ?>">
                 <i class="fas fa-shopping-bag"></i> Panier
             </a>
-            <a href="<?= BASE_URL ?>/contact.php" class="nav-link <?= $currentPage === 'contact' ? 'active' : '' ?>">
+            <a href="<?= BASE_URL ?>/contact" class="nav-link <?= $currentPage === 'contact' ? 'active' : '' ?>">
                 <i class="fas fa-envelope"></i> Contact
             </a>
         </nav>
@@ -97,7 +97,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
             </button>
 
             <!-- Cart -->
-            <a href="<?= BASE_URL ?>/panier.php" class="header-btn cart-btn" id="cartBtn">
+            <a href="<?= BASE_URL ?>/panier" class="header-btn cart-btn" id="cartBtn">
                 <i class="fas fa-shopping-bag"></i>
                 <span class="cart-badge" id="cartBadge" <?= $cartCount === 0 ? 'style="display:none"' : '' ?>><?= $cartCount ?></span>
             </a>
@@ -112,7 +112,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
     <!-- Search Overlay -->
     <div class="search-overlay" id="searchOverlay">
         <div class="container">
-            <form action="<?= BASE_URL ?>/boutique.php" method="GET" class="search-form">
+            <form action="<?= BASE_URL ?>/boutique" method="GET" class="search-form">
                 <input type="text" name="q" placeholder="Rechercher un produit..." class="search-input" id="searchInput" autocomplete="off">
                 <button type="submit" class="search-submit"><i class="fas fa-search"></i></button>
                 <button type="button" class="search-close" id="searchClose"><i class="fas fa-times"></i></button>
@@ -151,7 +151,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
             <span>Total</span>
             <strong id="miniCartTotal"><?= formatPrix(getCartTotal()) ?></strong>
         </div>
-        <a href="<?= BASE_URL ?>/panier.php" class="btn btn-primary btn-block">
+        <a href="<?= BASE_URL ?>/panier" class="btn btn-primary btn-block">
             Voir le panier <i class="fas fa-arrow-right"></i>
         </a>
     </div>

@@ -53,22 +53,13 @@ $totalClients = $stmt->fetchColumn();
 $stmt = $pdo->query("SELECT * FROM commandes ORDER BY date_commande DESC LIMIT 5");
 $dernieresCmd = $stmt->fetchAll();
 
-// --- DATA POUR CHART.JS ---
-// 1. Ventes par semaine
-$stmt = $pdo->query("SELECT * FROM v_graph_semaine");
-$dataSemaine = $stmt->fetchAll(PDO::FETCH_ASSOC);
+require_once __DIR__ . '/../includes/stats_functions.php';
 
-// 2. Ventes par mois
-$stmt = $pdo->query("SELECT * FROM v_graph_mois");
-$dataMois = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// 3. Top Catégories
-$stmt = $pdo->query("SELECT * FROM v_graph_categories");
-$dataCategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// 4. Top 7 Produits
-$stmt = $pdo->query("SELECT * FROM v_graph_top7_produits");
-$dataTopProduits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// --- DATA POUR CHART.JS (Optimisé via PHP Service) ---
+$dataSemaine    = getStatsVentesSemaine($pdo);
+$dataMois       = getStatsVentesMois($pdo);
+$dataCategories = getStatsParCategorie($pdo);
+$dataTopProduits = getStatsTopProduits($pdo);
 
 // Helper CSS status
 function getStatusBadge($statut) {
@@ -250,9 +241,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const dataCat = <?= json_encode($dataCategories) ?>;
     const dataTopProd = <?= json_encode($dataTopProduits) ?>;
 
+    // Store chart instances globally to allow theme updates
+    window.adminCharts = [];
+
     // 1. Chart Semaine (Bar)
     if (document.getElementById('chartSemaine')) {
-        new Chart(document.getElementById('chartSemaine'), {
+        const c1 = new Chart(document.getElementById('chartSemaine'), {
             type: 'bar',
             data: {
                 labels: dataSemaine.map(d => d.jour),
@@ -265,11 +259,12 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: { responsive: true, maintainAspectRatio: false }
         });
+        window.adminCharts.push(c1);
     }
 
     // 2. Chart Mois (Line)
     if (document.getElementById('chartMois')) {
-        new Chart(document.getElementById('chartMois'), {
+        const c2 = new Chart(document.getElementById('chartMois'), {
             type: 'line',
             data: {
                 labels: dataMois.map(d => d.mois),
@@ -284,11 +279,12 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: { responsive: true, maintainAspectRatio: false }
         });
+        window.adminCharts.push(c2);
     }
 
     // 3. Chart Categories (Doughnut)
     if (document.getElementById('chartCategories')) {
-        new Chart(document.getElementById('chartCategories'), {
+        const c3 = new Chart(document.getElementById('chartCategories'), {
             type: 'doughnut',
             data: {
                 labels: dataCat.map(d => d.categorie),
@@ -299,11 +295,12 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             options: { responsive: true, maintainAspectRatio: false }
         });
+        window.adminCharts.push(c3);
     }
 
     // 4. Chart Top Produits (Horizontal Bar)
     if (document.getElementById('chartTopProduits')) {
-        new Chart(document.getElementById('chartTopProduits'), {
+        const c4 = new Chart(document.getElementById('chartTopProduits'), {
             type: 'bar',
             data: {
                 labels: dataTopProd.map(d => d.produit),
@@ -320,6 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 maintainAspectRatio: false 
             }
         });
+        window.adminCharts.push(c4);
     }
 });
 </script>

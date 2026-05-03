@@ -141,5 +141,10 @@ function getStockEffectif(array $produit): int {
     return (int)$produit['stock'];
 }
 
-// Chemin de base
-define('BASE_URL', '/ecommerceMbeppa/version2');
+// Chemin de base dynamique (pour portabilité)
+$docRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']);
+$projectDir = str_replace('\\', '/', dirname(__DIR__));
+$baseUrl = str_ireplace($docRoot, '', $projectDir);
+$baseUrl = '/' . ltrim(str_replace('\\', '/', $baseUrl), '/');
+$baseUrl = rtrim($baseUrl, '/');
+define('BASE_URL', $baseUrl);

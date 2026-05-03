@@ -31,6 +31,80 @@
     --header-height: 70px;
 }
 
+html.dark-mode {
+    --bg-main: #0F172A;
+    --bg-card: #1E293B;
+    --text-main: #F8FAFC;
+    --text-muted: #94A3B8;
+    --border: #334155;
+    --secondary: #1E293B;
+    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    --primary-light: #3B82F6;
+}
+
+html.dark-mode .card-header {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+html.dark-mode .form-control {
+    background-color: #1E293B;
+    color: #F8FAFC;
+}
+
+html.dark-mode .admin-sidebar {
+    border-right: 1px solid var(--border);
+}
+
+html.dark-mode .table th {
+    background-color: #1e293b;
+}
+
+html.dark-mode .table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+html.dark-mode .page-title h1 {
+    color: white;
+}
+
+html.dark-mode .btn-secondary {
+    background-color: #334155;
+    color: #F8FAFC;
+    border-color: #475569;
+}
+
+html.dark-mode .btn-secondary:hover {
+    background-color: #475569;
+}
+
+html.dark-mode .sidebar-header {
+    background-color: #0F172A;
+}
+
+html.dark-mode .filter-bar .form-control {
+    background-color: #1E293B;
+    border-color: #334155;
+}
+
+/* Scrollbar Dark Mode */
+html.dark-mode ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+html.dark-mode ::-webkit-scrollbar-track {
+    background: #0F172A;
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 5px;
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
 * {
     margin: 0;
     padding: 0;

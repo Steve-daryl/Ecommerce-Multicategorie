@@ -62,10 +62,10 @@ $promos = $stmtPromos->fetchAll();
                 <h1>Découvrez les <span>Meilleurs Produits</span> au Meilleur Prix</h1>
                 <p>Explorez notre sélection exclusive de produits de qualité. Smartphones, ordinateurs, vêtements, accessoires et bien plus encore !</p>
                 <div class="hero-btns">
-                    <a href="<?= BASE_URL ?>/boutique.php" class="btn btn-primary btn-lg">
+                    <a href="<?= BASE_URL ?>/boutique" class="btn btn-primary btn-lg">
                         <i class="fas fa-store"></i> Découvrir la Boutique
                     </a>
-                    <a href="<?= BASE_URL ?>/contact.php" class="btn btn-secondary btn-lg">
+                    <a href="<?= BASE_URL ?>/contact" class="btn btn-secondary btn-lg">
                         <i class="fab fa-whatsapp"></i> Nous Contacter
                     </a>
                 </div>
@@ -89,7 +89,7 @@ $promos = $stmtPromos->fetchAll();
         </div>
         <div class="categories-grid">
             <?php foreach ($categories as $cat): ?>
-            <a href="<?= BASE_URL ?>/boutique.php?categorie=<?= $cat['id'] ?>" class="category-card">
+            <a href="<?= BASE_URL ?>/boutique?categorie=<?= $cat['id'] ?>" class="category-card">
                 <span class="icon"><?= $cat['icone'] ?></span>
                 <h3><?= e($cat['nom']) ?></h3>
                 <p><?= e($cat['description'] ?? '') ?></p>
@@ -132,7 +132,7 @@ $promos = $stmtPromos->fetchAll();
                         <?php endif; ?>
                     </div>
                     <div class="product-card-actions">
-                        <a href="<?= BASE_URL ?>/produit.php?id=<?= $p['id'] ?>" class="btn-icon" title="Voir détails">
+                        <a href="<?= BASE_URL ?>/produit?id=<?= $p['id'] ?>" class="btn-icon" title="Voir détails">
                             <i class="fas fa-eye"></i>
                         </a>
                     </div>
@@ -153,7 +153,7 @@ $promos = $stmtPromos->fetchAll();
                         <i class="fas fa-cart-plus"></i> Ajouter
                     </button>
                     <?php elseif ($p['a_variants']): ?>
-                    <a href="<?= BASE_URL ?>/produit.php?id=<?= $p['id'] ?>" class="btn btn-secondary btn-sm">
+                    <a href="<?= BASE_URL ?>/produit?id=<?= $p['id'] ?>" class="btn btn-secondary btn-sm">
                         <i class="fas fa-list"></i> Choisir option
                     </a>
                     <?php else: ?>
@@ -164,7 +164,7 @@ $promos = $stmtPromos->fetchAll();
             <?php endforeach; ?>
         </div>
         <div class="text-center" style="margin-top:40px;">
-            <a href="<?= BASE_URL ?>/boutique.php" class="btn btn-primary btn-lg">
+            <a href="<?= BASE_URL ?>/boutique" class="btn btn-primary btn-lg">
                 Voir tous les produits <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -200,7 +200,7 @@ $promos = $stmtPromos->fetchAll();
                     </div>
                 </div>
                 <div class="product-card-footer">
-                    <a href="<?= BASE_URL ?>/produit.php?id=<?= $p['id'] ?>" class="btn btn-accent btn-sm btn-block">
+                    <a href="<?= BASE_URL ?>/produit?id=<?= $p['id'] ?>" class="btn btn-accent btn-sm btn-block">
                         <i class="fas fa-fire"></i> Voir l'offre
                     </a>
                 </div>
@@ -219,7 +219,7 @@ $promos = $stmtPromos->fetchAll();
                 <h2 style="color: white;">Livraison Gratuite dès <?= formatPrix($params['seuil_livraison_gratuite'] ?? 50000) ?></h2>
                 <p>Commandez maintenant et profitez de la livraison offerte sur tous vos achats</p>
             </div>
-            <a href="<?= BASE_URL ?>/boutique.php" class="btn btn-lg">
+            <a href="<?= BASE_URL ?>/boutique" class="btn btn-lg">
                 Commander maintenant <i class="fas fa-arrow-right"></i>
             </a>
         </div>

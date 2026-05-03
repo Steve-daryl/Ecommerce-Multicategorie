@@ -58,7 +58,26 @@ $adminName = $_SESSION['admin_username'] ?? 'Admin';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <!-- Admin Stylesheet -->
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin.css?v=<?= time() ?>">
+
+    <script>
+    // Apply theme immediately to prevent flickering
+    (function() {
+        const theme = localStorage.getItem('admin_theme') || 'light';
+        const isDark = theme === 'dark';
+        if (isDark) {
+            document.documentElement.classList.add('dark-mode');
+        }
+        
+        // Global Chart.js configuration
+        window.addEventListener('load', () => {
+            if (typeof Chart !== 'undefined') {
+                Chart.defaults.color = isDark ? '#94A3B8' : '#64748B';
+                Chart.defaults.borderColor = isDark ? '#334155' : '#E2E8F0';
+            }
+        });
+    })();
+    </script>
 </head>
 <body>
 
@@ -134,6 +153,9 @@ $adminName = $_SESSION['admin_username'] ?? 'Admin';
                 </button>
             </div>
             <div class="header-right">
+                <button id="toggleDashboardTheme" class="btn btn-secondary btn-sm" title="Changer le thème">
+                    <i class="fas fa-moon"></i>
+                </button>
                 <a href="../" target="_blank" class="btn btn-secondary btn-sm" title="Voir la boutique">
                     <i class="fas fa-external-link-alt"></i> Boutique
                 </a>
