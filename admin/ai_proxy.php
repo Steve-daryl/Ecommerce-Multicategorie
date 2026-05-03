@@ -112,6 +112,8 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // useful for local environments like XAMPP
+curl_setopt($ch, CURLOPT_TIMEOUT, 30); // 30 seconds timeout
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10); // 10 seconds to connect
 
 $response = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -135,7 +137,7 @@ if ($httpCode === 200) {
     }
     
     if ($curlError) {
-        $errorMsg .= " (Erreur réseau)";
+        $errorMsg .= " (Erreur réseau : $curlError)";
     }
     
     echo json_encode([
